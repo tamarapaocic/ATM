@@ -15,7 +15,7 @@ public class Menu {
 
 	 
 	public void printMainMenu(){
-		System.out.println("\tWelcome to ATM! \n\n1.Sign in \n2.Sign up \n3.Deposit \n\nEnter the option 1-3: ");
+		System.out.println("\tWelcome to ATM! \n\n1.Sign in \n2.Sign up \n3.Transfer \n\nEnter the option 1-3: ");
 	}
 	
 	public int getUserOption(){
@@ -34,8 +34,7 @@ public class Menu {
 		} else if(option == 2 ){
 			guestHandler.register();
 		} else if(option == 3){
-			
-			//deposit for guest
+		    guestHandler.transfer();
 		}
 		
 	}

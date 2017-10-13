@@ -45,20 +45,17 @@ public class GuestDAOimplementation implements GuestDAO {
 	
 
 	@Override
-	public void transfer(Account account) {
-		// ResultSet rs = null;
+	public void transfer() {
         Connection connection = ConnectionManager.getInstance().getConnection();
         
-        try (PreparedStatement pstmt = connection.prepareStatement(" DELIMITER $$ DROP PROCEDURE IF EXISTS balance_transfer $$ CREATE PROCEDURE balance_transfer() BEGIN SELECT @balance:=balance FROM Account WHERE CustomerID = ?; IF @balance  >= (amount = ?) THEN START TRANSACTION; UPDATE account SET balance = balance - amount WHERE customerID = ?; UPDATE account SET balance = balance + amount WHERE customerID = ?;   COMMIT; END IF; END $$ DELIMITER ;  CALL balance_transfer; " ))
+        try (PreparedStatement pstmt = connection.prepareStatement("UPDATE account SET balance = (balance + ?) WHERE customerID = ?; " ))
         	
-        		 {
+        {
+        	double amount = doubleUserInput.getDouble("Enter the amount you want to transfer: ", 0);
+            pstmt.setDouble(1,amount);
+            pstmt.setInt(2, intUserInput.getInt("Enter the number of account to which you want to transfer: ", 0));
 
-            pstmt.setInt(1, account.getCustomer().getID());
-            pstmt.setDouble(2, doubleUserInput.getDouble("Enter the amount you want to transfer: ", 0));
-            pstmt.setInt(3, account.getCustomer().getID());
-            pstmt.setInt(4, intUserInput.getInt("Enter the number of account to which you want to transfer", 0));
-
-           pstmt.executeQuery();
+           pstmt.executeUpdate();
 
         } catch (SQLException ex) {
             Logger.getLogger(UserDAOimplementation.class.getName()).log(Level.SEVERE, null, ex);

@@ -14,5 +14,12 @@ public class GuestHandler {
 		}
 	}
 	
-	
+	public void transfer() {
+		try {  
+			GDAO.transfer();
+			System.out.println("\nSuccessfully transfered!");
+		}catch(Exception e){
+			System.err.println(e);
+		}
+	}
 }

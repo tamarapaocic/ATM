@@ -2,7 +2,7 @@ package DAO;
 
 public interface GuestDAO {
 
-	public void register();
+	public boolean register();
 	
 	public void transfer();
 }

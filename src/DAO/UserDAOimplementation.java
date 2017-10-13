@@ -19,13 +19,13 @@ public class UserDAOimplementation implements UserDAO {
 
 
 	@Override
-	public double getBalance(Account account) {
+	public double getBalance(String username) {
 		ResultSet rs = null;
         Connection connection = ConnectionManager.getInstance().getConnection();
         double balance = 0;
-        try (PreparedStatement pstmt = connection.prepareStatement("SELECT a.balance FROM ATM.Account AS a WHERE customerID = ?")) {
+        try (PreparedStatement pstmt = connection.prepareStatement("SELECT a.balance FROM ATM.Account AS `a` WHERE username = ?")) {
 
-            pstmt.setInt(1, account.getCustomerID());
+            pstmt.setString(1, username);
             rs = pstmt.executeQuery();
 
             if (rs.next()) {
@@ -53,14 +53,14 @@ public class UserDAOimplementation implements UserDAO {
             System.out.println("Balance updated successfully!");
 
         } catch (SQLException ex) {
-            Logger.getLogger(AdminDAOimplementation.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserDAOimplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
 		
 	}
 
 	@Override
 	public void withdraw(Account account,double amount) {
-		double balance = getBalance(account);
+		double balance = getBalance(account.getUsername());
 		
 		if(balance<amount){
 			System.out.println("There is no enough money on your account.");
@@ -74,7 +74,7 @@ public class UserDAOimplementation implements UserDAO {
 
 	@Override
 	public void deposit(Account account,double amount) {
-    double balance = getBalance(account);
+    double balance = getBalance(account.getUsername());
 
 			balance += amount;
 			setBalance(account,balance);

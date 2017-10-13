@@ -7,7 +7,7 @@ public interface UserDAO {
 	
 	//logout
 	
-	public double getBalance(Account account);
+	public double getBalance(String username);
 	
 	public void setBalance(Account account,double amount);
 	

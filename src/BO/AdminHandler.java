@@ -81,7 +81,15 @@ public class AdminHandler {
 			
 		}
 
-	    
+		public void getCustomersID(Customer customer) {
+			try{
+				int ID = ADAO.getCustomersID(customer);
+				System.out.print(ID);
+			}catch(Exception e){
+				System.err.println(e);
+			}
+			
+		}
 
 	    public void addAccount(){
 	    	 try{

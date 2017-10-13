@@ -10,7 +10,6 @@ public class BOHelper {
     DoubleUserInput doubleUserInput = new DoubleUserInput();
     IntUserInput intUserInput = new IntUserInput();
 
-
     
 	public  Customer getCustomerInfo() {
         String firstName = stringUserInput.getString("Enter first name: ");

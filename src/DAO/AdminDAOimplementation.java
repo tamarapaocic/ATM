@@ -101,6 +101,22 @@ public class AdminDAOimplementation implements AdminDAO {
         return customers;
 	}
 
+	@Override
+	public int getCustomersID(Customer customer) {
+        Connection connection = ConnectionManager.getInstance().getConnection();
+        String query = "SELECT c.ID FROM Customer as `c` WHERE firstName = '" + customer.getFirstName() + "';";
+        int ID = -1;
+        try (Statement stmt = connection.createStatement();
+                ResultSet rs = stmt.executeQuery(query)) {
+        	if(rs.next()){
+         ID = rs.getInt("ID");
+        	}
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+
+        return ID;
+	}
 	
 	@Override
 	public List<Account> getAllCustomersWithAccount() {
@@ -221,5 +237,22 @@ public class AdminDAOimplementation implements AdminDAO {
 	}
 
 
+	@Override
+    public List<String> getUsernames() {
+        Connection connection = ConnectionManager.getInstance().getConnection();
+        List<String> usernames = new ArrayList<>();
+
+        String query = "SELECT username FROM ATM.account;";
+
+        try (Statement stmt = connection.createStatement();
+                ResultSet rs = stmt.executeQuery(query)) {
+            while (rs.next()) {
+                usernames.add(rs.getString("username"));
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return usernames;
+    }
 	
 }

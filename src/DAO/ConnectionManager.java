@@ -38,7 +38,7 @@ public class ConnectionManager {
 	public Connection getConnection(){
 		if (connection == null){
 			if(openConnection()){
-				System.out.println("Connection opened.");
+				System.out.println(" ");
 				return connection;
 			} else{
 				return null;

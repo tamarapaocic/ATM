@@ -29,8 +29,6 @@ public class Customer {
 		this.email = email;
 	}
 	
-	
-	
 	public int getID(){
 		return ID;
 	}

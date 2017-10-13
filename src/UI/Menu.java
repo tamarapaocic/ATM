@@ -1,6 +1,7 @@
 package UI;
 
 import BO.AdminHandler;
+import BO.GuestHandler;
 import BO.IntUserInput;
 import BO.LoginHandler;
 
@@ -8,8 +9,10 @@ import BO.LoginHandler;
 public class Menu {
 
 	 LoginHandler loginHandler = new LoginHandler();
-	 IntUserInput intUserInput = new IntUserInput();
 	 AdminHandler adminHandler = new AdminHandler();
+	 GuestHandler guestHandler = new GuestHandler();
+	 IntUserInput intUserInput = new IntUserInput();
+
 	 
 	public void printMainMenu(){
 		System.out.println("\tWelcome to ATM! \n\n1.Sign in \n2.Sign up \n3.Deposit \n\nEnter the option 1-3: ");
@@ -29,9 +32,7 @@ public class Menu {
 		if (option == 1){
 			loginHandler.login();
 		} else if(option == 2 ){
-			
-			//register
-			
+			guestHandler.register();
 		} else if(option == 3){
 			
 			//deposit for guest

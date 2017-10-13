@@ -20,6 +20,8 @@ public interface AdminDAO {
 	public List<Account> getAllCustomersWithAccount();
 
 	public List<Account> getCustomersInfo(String username);
+	
+	public int getCustomersID(Customer customer);
 
     public Account getAccount(int ID);
 
@@ -31,6 +33,6 @@ public interface AdminDAO {
 
     public void deleteAccount(int ID);
 
-	
+    public List<String> getUsernames();
     
 }

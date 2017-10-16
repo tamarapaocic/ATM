@@ -14,7 +14,7 @@ public class UserMenu {
 	    if (option == 1){
 	        userHandler.getBalance();
 		} else if(option == 2 ){
-			// userHandler.withdraw();
+			userHandler.withdraw();
 		} else if(option == 3){
 		    // userHandler.deposit();
 		} else if(option == 4){

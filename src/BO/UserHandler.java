@@ -10,6 +10,7 @@ public class UserHandler {
 	 LoginDAOimplementation LDAO = new LoginDAOimplementation();
 	 BOHelper boHelper = new BOHelper();
 	 IntUserInput intUserInput = new IntUserInput();
+	 DoubleUserInput doubleUserInput = new DoubleUserInput();
 	 StringUserInput stringUserInput = new StringUserInput();
 	 Account account = new Account();
 	 
@@ -23,6 +24,18 @@ public class UserHandler {
 		 }
 	 }
 	 
+	public void withdraw(){
+		try{
+			 String username = LoginDAOimplementation.loginList.getLast();
+			 double amount = doubleUserInput.getDouble("Enter the amount you want to withdraw: ", 0);
+			 UDAO.withdraw(username, amount);
+		 }catch(Exception e){
+				System.err.println(e);
+		 }
+	}
+	
+	
+	
 	public void transfer() {
 		try {  
 			UDAO.transfer();

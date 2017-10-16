@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import DTO.Account;
 import BO.DoubleUserInput;
 import BO.IntUserInput;
 
@@ -41,13 +40,13 @@ public class UserDAOimplementation implements UserDAO {
 	}
 	
 	@Override
-	public void setBalance(Account account,double amount) {
+	public void setBalance(String username,double amount) {
 		Connection connection = ConnectionManager.getInstance().getConnection();
-
-        try (PreparedStatement pstmt = connection.prepareStatement("UPDATE ATM.Account SET balance=? WHERE customerID = ? ")) {
+		
+        try (PreparedStatement pstmt = connection.prepareStatement("UPDATE ATM.Account SET balance=? WHERE username = ? ")) {
      
         	pstmt.setDouble(1, amount);
-            pstmt.setInt(2, account.getCustomer().getID());
+            pstmt.setString(2, username);
 
             pstmt.executeUpdate();
 
@@ -60,25 +59,25 @@ public class UserDAOimplementation implements UserDAO {
 	}
 
 	@Override
-	public void withdraw(Account account,double amount) {
-		double balance = getBalance(account.getUsername());
+	public void withdraw(String username,double amount) {
+		double balance = getBalance(username);
 		
 		if(balance<amount){
 			System.out.println("There is no enough money on your account.");
 		}else {
 			balance -= amount;
-			setBalance(account,balance);
-			System.out.println("\n\t\tYou withdrew " + amount + " .\n\t\tCurrent balance: " + balance + ".");
+			setBalance(username,balance);
+			System.out.println("\n\tYou withdrew " + amount + " .\n\tCurrent balance: " + balance + ".\n");
 
 		}		
 	}
 
 	@Override
-	public void deposit(Account account,double amount) {
-    double balance = getBalance(account.getUsername());
+	public void deposit(String username,double amount) {
+    double balance = getBalance(username);
 
 			balance += amount;
-			setBalance(account,balance);
+			setBalance(username,balance);
 			System.out.println("\n\t\tYou deposited " + amount + " .\n\t\tCurrent balance: " + balance + ".");
 
 	}

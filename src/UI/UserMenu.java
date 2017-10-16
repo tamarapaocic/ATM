@@ -12,7 +12,7 @@ public class UserMenu {
 		printUserMenu();
 	    int option = getUserOption();
 	    if (option == 1){
-			// userHandler.getBalance();
+	        userHandler.getBalance();
 		} else if(option == 2 ){
 			// userHandler.withdraw();
 		} else if(option == 3){

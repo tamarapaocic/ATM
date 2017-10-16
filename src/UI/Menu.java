@@ -1,6 +1,5 @@
 package UI;
 
-import BO.AdminHandler;
 import BO.GuestHandler;
 import BO.IntUserInput;
 import BO.LoginHandler;
@@ -9,25 +8,23 @@ import BO.LoginHandler;
 public class Menu {
 
 	 LoginHandler loginHandler = new LoginHandler();
-	 AdminHandler adminHandler = new AdminHandler();
 	 GuestHandler guestHandler = new GuestHandler();
 	 IntUserInput intUserInput = new IntUserInput();
 
 	 
 	public void printMainMenu(){
-		System.out.println("\tWelcome to ATM! \n\n1.Sign in \n2.Sign up \n3.Transfer \n\nEnter the option 1-3: ");
+		System.out.println("\tWelcome to ATM! \n\n1.Sign in \n2.Sign up \n3.Transfer \n4.Exit \n\nEnter the option 1-4: ");
 	}
 	
 	public int getUserOption(){
 		while(true){
 			try{
-			return intUserInput.getInt("", 1, 3);
+			return intUserInput.getInt("", 1, 4);
 		} catch (Exception e){}
 	}
 	}
 	
 	public void startApp(){
-		printMainMenu();
 		int option = getUserOption();
 		if (option == 1){
 			loginHandler.login();
@@ -35,9 +32,19 @@ public class Menu {
 			guestHandler.register();
 		} else if(option == 3){
 		    guestHandler.transfer();
+		} else if(option == 4){
+			System.exit(0);
 		}
 		
 	}
+	
+	public void run(){
+		while (true) { 
+		printMainMenu();
+		startApp();
+	        }
+	}
+	
 	
 	
 }

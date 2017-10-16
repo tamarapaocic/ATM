@@ -1,8 +1,8 @@
 package BO;
 
-import java.util.HashMap;
 import java.util.List;
 import DAO.AdminDAOimplementation;
+import DAO.LoginDAOimplementation;
 import DTO.Account;
 import DTO.Customer;
 import BO.BOHelper;
@@ -11,19 +11,12 @@ import BO.IntUserInput;
 public class AdminHandler {
 
 	 AdminDAOimplementation ADAO = new AdminDAOimplementation();
-
+	 LoginDAOimplementation LDAO = new LoginDAOimplementation();
 	 BOHelper boHelper = new BOHelper();
 	 IntUserInput intUserInput = new IntUserInput();
 	 StringUserInput stringUserInput = new StringUserInput();
 
 	
-	 public HashMap<String,String> usernameAndPin(){
-		 return ADAO.usernameAndPin();
-	 }
-	 
-	 /**	Map<String, String> users = adminHandler.usernameAndPin();
-		for (Map.Entry entry : users.entrySet()) {
-		    System.out.println(entry.getKey() + ": " + entry.getValue()); } **/
 	 
 	 public void addCustomer(){
 		 try{
@@ -120,5 +113,15 @@ public class AdminHandler {
 	         }
 	    }
 	
-	
+	 public void viewLoggedUsers(){
+		 if (LoginDAOimplementation.getList().isEmpty()){
+			 System.out.println("No logged users.");
+		 } else {
+			      System.out.println("Logged users: ");
+			      for(String acc: LoginDAOimplementation.getList()){
+		    	  System.out.println(acc);
+		      }
+			}
+			System.out.println();
+	 }
 }

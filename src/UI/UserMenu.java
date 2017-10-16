@@ -18,19 +18,21 @@ public class UserMenu {
 		} else if(option == 3){
 		    // userHandler.deposit();
 		} else if(option == 4){
-			// userHandler.transfer();
-		} 
+			userHandler.transfer();
+		} else if(option == 5){
+			//logout
+		}
 	}
 	
 	public void printUserMenu(){
-		System.out.println("\n1.Get balance \n2.Withdraw \n3.Deposit \n4.Transfer \n\nEnter the option 1-4: ");
+		System.out.println("\n1.Get balance \n2.Withdraw \n3.Deposit \n4.Transfer \n5.Logout \n\nEnter the option 1-5: ");
 	}
 	
 	
 	public int getUserOption(){
 		while(true){
 			try{
-			return intUserInput.getInt("", 1, 8);
+			return intUserInput.getInt("", 1, 5);
 		} catch (Exception e){}
 	}
 	}

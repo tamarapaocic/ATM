@@ -1,65 +1,81 @@
 package BO;
+
 import java.util.HashMap;
+
+import DAO.LoginDAOimplementation;
 import UI.AdminMenu;
 import UI.UserMenu;
-import BO.AdminHandler;
-import BO.StringUserInput;
 
 public class LoginHandler {
 
-	 AdminHandler adminHandler = new AdminHandler();
+
 	 AdminMenu adminMenu = new AdminMenu();
 	 UserMenu userMenu = new UserMenu();
+	 LoginDAOimplementation LDAO = new LoginDAOimplementation();
 	 StringUserInput stringUserInput = new StringUserInput();
-
+	 
     
 	public  void login() {
 		String username = stringUserInput.getString("Enter username: ");
 		String pin = stringUserInput.getString("Enter pin: ");
-		validateAdmin(username, pin);
-	}
-
-	public void validateAdmin(String username, String pin) {
-		if (validateAdminsAccount(username) && validateAdminsPin(pin)) {
-			adminMenu.getAdminMenu();
-		} else {
-			validateUser(username, pin);
+		if (validateUser(username, pin)){
+		checkRole(username);
+		LoginDAOimplementation.loginList.add(username);
 		}
 	}
-
-	public  boolean validateAdminsAccount(String username) {
-		return username.equalsIgnoreCase("admin");
+	
+	public void logout(){
+		LoginDAOimplementation.loginList.removeLast();
 	}
-
-	public  boolean validateAdminsPin(String pin) {
-		return pin.equals("comoestas77");
-	}
-
-	public void validateUser(String username, String pin) {
+	
+	 public void checkRole(String username){
+		 if(getRole(username).equals("admin")){
+			 adminMenu.getAdminMenu();
+		 }else {
+			 userMenu.getUserMenu();
+		 }
+	 }
+	 
+	 
+	public String getRole(String username){
+		return LDAO.getRole(username);
+		}
+	
+	
+        public boolean validateUser(String username, String pin) {
 		if (isAccountInList(username)){
 			validatePin(username, pin);
+                        return true;
 		} else {
 			System.out.println("Wrong username! Try again!");
+                        return false;
 			}
 	}
 
-	public  boolean isAccountInList(String username) {
-		HashMap<String,String> accounts = adminHandler.usernameAndPin();
+
+        public  boolean isAccountInList(String username) {
+		HashMap<String,String> accounts = usernameAndPin();
 		return accounts.containsKey(username);
 	}
 
-	public  void validatePin(String username, String pin) {
+        
+   	 public HashMap<String,String> usernameAndPin(){
+		 return LDAO.usernameAndPin();
+	 }
+   	 
+   	 
+        public  boolean validatePin(String username, String pin) {
 		if (isPinValid(username, pin)){
-			userMenu.getUserMenu();
+			return true;
 		} else {
 			System.out.println("Wrong password! Try again!");
+            return false;
 			}
 	}
-
-	public  boolean isPinValid(String username, String pin) {
-		HashMap<String, String> accounts = adminHandler.usernameAndPin();
+ 
+        public  boolean isPinValid(String username, String pin) {
+		HashMap<String, String> accounts = usernameAndPin();
 		return accounts.get(username).equals(pin);
 	}
-	
 	
 }

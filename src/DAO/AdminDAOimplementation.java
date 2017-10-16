@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import DTO.Account;
@@ -160,28 +159,7 @@ public class AdminDAOimplementation implements AdminDAO {
 	}
 
 
-	@Override
-	public HashMap<String, String> usernameAndPin() {
-		Connection connection = ConnectionManager.getInstance().getConnection();
-
-		HashMap<String, String> users = new HashMap<>();
-
-        String query = "SELECT username, pin FROM atm.account;";
-
-        try (PreparedStatement stmt = connection.prepareStatement(query);
-                ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-            	users.put(rs.getString("username"), rs.getString("pin"));
-            }
-
-        } catch (Exception e) {
-            System.err.println(e);
-        }
-
-        return users;
-	}
-
+	
 
 	@Override
 	public void addAccount(Account account) {
@@ -254,5 +232,7 @@ public class AdminDAOimplementation implements AdminDAO {
         }
         return usernames;
     }
+	
+	
 	
 }

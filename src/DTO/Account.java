@@ -7,12 +7,21 @@ public class Account {
 	private String username;
 	private String pin;
 	private double balance;
+	private String role;
 	
+	
+
 	public Account() {
 		super();
 		this.username = "";
 		this.pin = "";
 		this.balance = 0;
+	}
+	
+	public Account(String username, String pin) {
+		super();
+		this.username = username;
+		this.pin = pin;
 	}
 	
 	public Account(String username, String pin, double balance) {
@@ -67,11 +76,19 @@ public class Account {
 	}
 	public void setBalance(double balance) {
 		this.balance = balance;
-		
 	}
+	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	@Override
 	public String toString(){
-		return customer.toString() + "\nAccount --> Username: " + username + " Pin: " + pin + " Balance: " + balance + "\n";
+	 return customer.toString() + "\nAccount --> Username: " + username + " Pin: " + pin + " Balance: " + balance + "\n";
 	}
 	
 	

@@ -15,7 +15,7 @@ public interface UserDAO {
 	
 	public void deposit(Account account,double amount);
 	
-	public void transfer(Account account);
+	public void transfer();
 
 	
 }

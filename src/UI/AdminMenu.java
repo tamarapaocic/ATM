@@ -1,12 +1,15 @@
 package UI;
 
 import BO.IntUserInput;
+import DAO.LoginDAOimplementation;
 import BO.AdminHandler;
 
 public class AdminMenu {
 
 	 IntUserInput intUserInput = new IntUserInput();
      AdminHandler adminHandler = new AdminHandler();
+	 LoginDAOimplementation LDAO = new LoginDAOimplementation();
+
      
 	public  void getAdminMenu(){
     printAdminMenu();
@@ -27,21 +30,26 @@ public class AdminMenu {
 		adminHandler.updateAccount();
 	} else if(option == 8){
 		adminHandler.deleteAccount();
+	} else if(option == 9){
+		adminHandler.viewLoggedUsers();
+	} else if(option == 10){
+		//logout
 	}
     
 	}
 	
 	public void printAdminMenu(){
-		System.out.println("\n1.List of all customers \n2.Add customer \n3.Update customer \n4.Delete customer \n5.Get customer's info \n6.Add account \n7.Update account \n8.Delete account");
+		System.out.println("\n\tADMIN'S MENU");
+		System.out.println("\n1.List of all customers \n2.Add customer \n3.Update customer \n4.Delete customer \n5.Get customer's info \n6.Add account \n7.Update account \n8.Delete account \n9.View all logged users \n10.Logout \n\nEnter the option 1-10: ");
 	}
 	
 	public int getUserOption(){
 		while(true){
 			try{
-			return intUserInput.getInt("", 1, 8);
+			return intUserInput.getInt("", 1, 10);
 		} catch (Exception e){}
 	}
 	}
 	
-	
+ 	
 }

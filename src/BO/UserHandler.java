@@ -34,7 +34,15 @@ public class UserHandler {
 		 }
 	}
 	
-	
+	public void deposit(){
+		try{
+			 String username = LoginDAOimplementation.loginList.getLast();
+			 double amount = doubleUserInput.getDouble("Enter the amount you want to deposit: ", 0);
+			 UDAO.deposit(username, amount);
+		 }catch(Exception e){
+				System.err.println(e);
+		 }
+	}
 	
 	public void transfer() {
 		try {  

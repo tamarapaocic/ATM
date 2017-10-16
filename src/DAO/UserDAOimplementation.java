@@ -78,7 +78,7 @@ public class UserDAOimplementation implements UserDAO {
 
 			balance += amount;
 			setBalance(username,balance);
-			System.out.println("\n\t\tYou deposited " + amount + " .\n\t\tCurrent balance: " + balance + ".");
+			System.out.println("\n\tYou deposited " + amount + " .\n\tCurrent balance: " + balance + ".\n");
 
 	}
 

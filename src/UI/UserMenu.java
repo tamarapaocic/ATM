@@ -16,7 +16,7 @@ public class UserMenu {
 		} else if(option == 2 ){
 			userHandler.withdraw();
 		} else if(option == 3){
-		    // userHandler.deposit();
+		    userHandler.deposit();
 		} else if(option == 4){
 			userHandler.transfer();
 		} else if(option == 5){

@@ -10,9 +10,10 @@ public class UserMenu {
      
 	 
 	public void getUserMenu(){
-		printUserMenu();
-		int option = getUserOption();
-		if (option == 1){
+		int option;
+		do { printUserMenu();
+	     option = getUserOption();
+			if (option == 1){
 	        userHandler.getBalance();
 		} else if(option == 2 ){
 			userHandler.withdraw();
@@ -23,10 +24,12 @@ public class UserMenu {
 		} else if(option == 5){
 			//logout
 		}
+		}while(option != 5);
 	}
 	
 	
 	public void printUserMenu(){
+		System.out.println("\n\tUSER'S MENU");
 		System.out.println("\n1.Get balance \n2.Withdraw \n3.Deposit \n4.Transfer \n5.Logout \n\nEnter the option 1-5: ");
 	}
 	

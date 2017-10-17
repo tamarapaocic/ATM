@@ -12,8 +12,10 @@ public class AdminMenu {
 
      
 	public  void getAdminMenu(){
+		int option;
+		do {
     printAdminMenu();
-    int option = getUserOption();
+    option = getUserOption();
     if (option == 1){
 		adminHandler.getAllCustomersWithAccount();
 	} else if(option == 2 ){
@@ -35,6 +37,7 @@ public class AdminMenu {
 	} else if(option == 10){
 		//logout
 	}
+		}while(option != 10);
     
 	}
 	

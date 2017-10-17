@@ -10,7 +10,7 @@ public class ConnectionManager {
 	
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "kialoptica";
-	private static final String CONN_STRING = "jdbc:mysql://localhost/atm?useSSL=false";
+	private static final String CONN_STRING = "jdbc:mysql://localhost/atm?useSSL=false&amp;allowMultiQueries=true";
 	
 	private Connection connection = null;
 	

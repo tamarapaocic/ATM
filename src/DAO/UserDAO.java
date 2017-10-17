@@ -2,9 +2,6 @@ package DAO;
 
 public interface UserDAO {
 
-	//login
-	
-	//logout
 	
 	public double getBalance(String username);
 	
@@ -14,7 +11,7 @@ public interface UserDAO {
 	
 	public void deposit(String username,double amount);
 	
-	public void transfer();
+	public void transfer(int id);
 
 	
 }

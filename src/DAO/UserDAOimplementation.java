@@ -1,5 +1,6 @@
 package DAO;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 
 import java.sql.PreparedStatement;
@@ -83,27 +84,21 @@ public class UserDAOimplementation implements UserDAO {
 	}
 
 	@Override
-	public void transfer() {
+	public void transfer(int id) {
 
 		Connection connection = ConnectionManager.getInstance().getConnection();
-        // connection.setAutoCommit(false);
-        try (PreparedStatement pstmt = connection.prepareStatement(" DELIMITER $$ DROP PROCEDURE IF EXISTS balance_transfer $$ CREATE PROCEDURE balance_transfer() BEGIN SELECT @balance:=balance FROM Account WHERE CustomerID = ?; IF (@balance  >= ?) THEN START TRANSACTION; UPDATE account SET balance = (balance - ?) WHERE customerID = ?; UPDATE account SET balance = (balance + ?) WHERE customerID = ?;   COMMIT; END IF; END $$ DELIMITER ;  CALL balance_transfer; " ))
-        	
-        		 {
-            double amount = doubleUserInput.getDouble("Enter the amount you want to transfer: ", 0);
-            int ID = intUserInput.getInt("Enter your ID: ", 0);
-            pstmt.setInt(1, ID);
-            pstmt.setDouble(2, amount);
-            pstmt.setDouble(3, amount);
-            pstmt.setInt(4, ID);
-            pstmt.setDouble(5, amount);
-            pstmt.setInt(6, intUserInput.getInt("Enter the number of account to which you want to transfer: ", 0));
+		try {
+			CallableStatement cstmt = connection.prepareCall("CALL balance_transfer(?,?,?);");
+			 double amount = doubleUserInput.getDouble("Enter the amount you want to transfer: ", 0);
+	            cstmt.setDouble(1, amount);
+	            cstmt.setInt(2, id);
+	            cstmt.setInt(3, intUserInput.getInt("Enter the number of account to which you want to transfer: ", 0));
+		     cstmt.execute();  
 
-            pstmt.executeUpdate();
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAOimplementation.class.getName()).log(Level.SEVERE, null, ex);
-        }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

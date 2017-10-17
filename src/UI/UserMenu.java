@@ -7,11 +7,12 @@ public class UserMenu {
 
 	 IntUserInput intUserInput = new IntUserInput();
 	 UserHandler userHandler = new UserHandler();
+     
 	 
 	public void getUserMenu(){
 		printUserMenu();
-	    int option = getUserOption();
-	    if (option == 1){
+		int option = getUserOption();
+		if (option == 1){
 	        userHandler.getBalance();
 		} else if(option == 2 ){
 			userHandler.withdraw();
@@ -23,6 +24,7 @@ public class UserMenu {
 			//logout
 		}
 	}
+	
 	
 	public void printUserMenu(){
 		System.out.println("\n1.Get balance \n2.Withdraw \n3.Deposit \n4.Transfer \n5.Logout \n\nEnter the option 1-5: ");

@@ -33,11 +33,13 @@ INSERT INTO Account(username,pin,customerID) VALUES ('mirelaa','4444',4);
 
 UPDATE Account SET Balance = 2000 WHERE customerID = 1;
 
-SELECT username, pin FROM ATM.Account;
 
-select * from account;
-
-SELECT * FROM CUSTOMER;
+DELIMITER $$ 
+DROP procedure IF exists balance_transfer $$ CREATE PROCEDURE balance_transfer(amount decimal,id1 int,id2 int) BEGIN SELECT @balance:=balance FROM account WHERE CustomerID = id1; 
+IF @balance >= amount THEN START TRANSACTION; 
+UPDATE account SET balance = balance - amount WHERE customerID = id1; 
+UPDATE account SET balance = balance + amount WHERE customerID = id2;  
+COMMIT; END IF; END $$ DELIMITER ; 
 
 
 

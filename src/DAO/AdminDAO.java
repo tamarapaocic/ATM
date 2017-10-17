@@ -18,6 +18,8 @@ public interface AdminDAO {
 	public List<Account> getCustomersInfo(String username);
 	
 	public int getCustomersID(Customer customer);
+	
+	public int getCustomersID(String username);
 
     public Account getAccount(int ID);
 

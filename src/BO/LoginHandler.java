@@ -19,8 +19,8 @@ public class LoginHandler {
 		String username = stringUserInput.getString("Enter username: ");
 		String pin = stringUserInput.getString("Enter pin: ");
 		if (validateUser(username, pin)){
+	    LoginDAOimplementation.loginList.add(username);
 		checkRole(username);
-		LoginDAOimplementation.loginList.add(username);
 		}
 	}
 	

@@ -118,6 +118,24 @@ public class AdminDAOimplementation implements AdminDAO {
 	}
 	
 	@Override
+	public int getCustomersID(String username) {
+        Connection connection = ConnectionManager.getInstance().getConnection();
+        String query = "SELECT a.customerID FROM Account as `a` WHERE username = '" + username + "';";
+        int ID = -1;
+        try (Statement stmt = connection.createStatement();
+                ResultSet rs = stmt.executeQuery(query)) {
+        	if(rs.next()){
+         ID = rs.getInt("customerID");
+        	}
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+
+        return ID;
+	}
+	
+	
+	@Override
 	public List<Account> getAllCustomersWithAccount() {
 		List<Account> customers = new ArrayList<>();
         Connection connection = ConnectionManager.getInstance().getConnection();

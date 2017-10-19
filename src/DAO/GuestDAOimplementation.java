@@ -51,9 +51,13 @@ public class GuestDAOimplementation implements GuestDAO {
         try (PreparedStatement pstmt = connection.prepareStatement("UPDATE account SET balance = (balance + ?) WHERE customerID = ?; " ))
         	
         {
+        	int id;
         	double amount = doubleUserInput.getDouble("Enter the amount you want to transfer: ", 0);
             pstmt.setDouble(1,amount);
-            pstmt.setInt(2, intUserInput.getInt("Enter the number of account to which you want to transfer: ", 0));
+            do{
+            id = intUserInput.getInt("Enter the number of account to which you want to transfer: ", 0);
+            pstmt.setInt(2, id);
+            }while(ADAO.getIDsFromAccountTable().contains(id) != true);
 
            pstmt.executeUpdate();
 

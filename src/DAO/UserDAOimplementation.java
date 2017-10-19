@@ -90,9 +90,14 @@ public class UserDAOimplementation implements UserDAO {
 		try {
 			CallableStatement cstmt = connection.prepareCall("CALL balance_transfer(?,?,?);");
 			 double amount = doubleUserInput.getDouble("Enter the amount you want to transfer: ", 0);
+			 int id2;
 	            cstmt.setDouble(1, amount);
 	            cstmt.setInt(2, id);
-	            cstmt.setInt(3, intUserInput.getInt("Enter the number of account to which you want to transfer: ", 0));
+	         do{ 
+	        	 id2 =  intUserInput.getInt("Enter the number of account to which you want to transfer: ", 0);
+	        	 cstmt.setInt(3, id2);
+	         }while(ADAO.getIDsFromAccountTable().contains(id2) != true);
+	         
 		     cstmt.execute();  
 
 		} catch (SQLException e) {

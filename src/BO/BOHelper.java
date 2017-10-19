@@ -2,13 +2,17 @@ package BO;
 
 import DTO.Account;
 import DTO.Customer;
+
+
 import BO.StringUserInput;
+import DAO.AdminDAOimplementation;
 
 public class BOHelper {
 
     StringUserInput stringUserInput = new StringUserInput();
     DoubleUserInput doubleUserInput = new DoubleUserInput();
     IntUserInput intUserInput = new IntUserInput();
+	 AdminDAOimplementation ADAO = new AdminDAOimplementation();
 
    
 	public  Customer getCustomerInfo() {
@@ -39,10 +43,19 @@ public class BOHelper {
 	}
 	
 	public Account getAccountInfoWithID(){
-        int ID = intUserInput.getInt("Enter ID: ", 0);
-		 String username = stringUserInput.getString("Enter username: ");
-		 String pin = stringUserInput.getString("Enter pin: ");
-        
+		
+		int ID;
+		String username;
+		String pin;
+
+		do{
+         ID = intUserInput.getInt("Enter ID: ", 0);
+		}while ((ADAO.getIDsFromCustomerTable().contains(ID) != true) || (ADAO.getIDsFromAccountTable().contains(ID) != false));
+		username = stringUserInput.getString("Enter username: ");
+		 pin = stringUserInput.getString("Enter pin: ");
+		 System.out.println();
         return new Account(ID, username, pin);
+	    
+       
 	}
 }

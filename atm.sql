@@ -46,5 +46,6 @@ ALTER TABLE Account ADD COLUMN role VARCHAR(5) DEFAULT 'user';
 
 UPDATE Account SET role = "admin" WHERE customerID = 3;
 
+ALTER TABLE Account MODIFY customerID INT UNIQUE;
 
 

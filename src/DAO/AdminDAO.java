@@ -31,4 +31,10 @@ public interface AdminDAO {
 
     public List<String> getUsernames();
     
+    public List<Integer> getIDsFromCustomerTable();
+    
+    public List<Integer> getIDsFromAccountTable();
+
+
+    
 }

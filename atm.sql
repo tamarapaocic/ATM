@@ -42,4 +42,9 @@ UPDATE account SET balance = balance + amount WHERE customerID = id2;
 COMMIT; END IF; END $$ DELIMITER ; 
 
 
+ALTER TABLE Account ADD COLUMN role VARCHAR(5) DEFAULT 'user';
+
+UPDATE Account SET role = "admin" WHERE customerID = 3;
+
+
 

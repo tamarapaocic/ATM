@@ -18,7 +18,10 @@ public class BOHelper {
 	public  Customer getCustomerInfo() {
         String firstName = stringUserInput.getString("Enter first name: ");
         String lastName = stringUserInput.getString("Enter last name: ");
-        String JMBG = stringUserInput.getString("Enter JMBG: ");
+        String JMBG;
+        do { 
+            JMBG = stringUserInput.getString("Enter JMBG: ");
+        }while (JMBG.length() != 13);
         String email = stringUserInput.getString("Enter email: ");
         
         return new Customer(firstName, lastName, JMBG, email);
@@ -27,7 +30,10 @@ public class BOHelper {
 	public  Customer getCustomerInfoWithID() {
         String firstName = stringUserInput.getString("Enter first name: ");
         String lastName = stringUserInput.getString("Enter last name: ");
-        String JMBG = stringUserInput.getString("Enter JMBG: ");
+        String JMBG;
+        do { 
+            JMBG = stringUserInput.getString("Enter JMBG: ");
+        }while (JMBG.length() != 13);        
         String email = stringUserInput.getString("Enter email: ");
         int ID = intUserInput.getInt("Enter ID: ", 0);
         
